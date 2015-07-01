@@ -36,8 +36,11 @@ $ bower install
 
 ## Releases
 
-[Github releases](https://github.com/hiof/semesterstart/releases)
+- v1.0.0 - Initial semesterstart functionality
+
+[Github releases](https://github.com/hiof/semesterstart-view/releases)
 
 ### Roadmap
 
-v1.0.0 - Initial Semesterstart
+
+- v1.1.0 - Adjustments according to spring semester 2016
