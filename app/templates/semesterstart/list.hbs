@@ -1,8 +1,11 @@
+<header>
+    <h1>Studiestart</h1>
+</header>
 <aside class="lo-full padding-off">
-<p>Finn informasjon om studiestart tilrettelagt deg.</p>
+<p>Søk frem studiet du skal begynne på til høsten. Da vil du finne viktig informasjon for deg som ny student, og du kan se og synkronisere din kalender.</p>
 {{#ifCond meta.type 'studystart'}}
 <ol class="breadcrumb">
-  <li><form class="form-inline"><div class="form-group"><label for="semesterstart-filter" class="visuallyhidden">Søk etter ditt studie</label><input id="semesterstart-filter" type="text" class="form-control" placeholder="Søk etter ditt studie" ></div></form></li>
+  <li><form class="form-inline"><div class="form-group"><label for="semesterstart-filter" class="visuallyhidden">Søk fram ditt studium</label><input id="semesterstart-filter" type="text" class="form-control" placeholder="Søk fram ditt studium" ></div></form></li>
 </ol>
 {{/ifCond}}
 </aside>
@@ -10,7 +13,7 @@
 <table class="lo-full padding-off footable" data-page-size="200" data-filter="#semesterstart-filter">
     <thead>
         <tr>
-            <th data-sort-initial="true">Navn</th>
+            <th data-sort-initial="true">Studieprogram</th>
             <th data-hide="phone">Informasjon</th>
             <th data-hide="phone">Kalender</th>
         </tr>

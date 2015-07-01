@@ -1,7 +1,15 @@
+{{#each semesterstart}}
+       {{#if name}}
+        <header>
+          <h1>{{name}}</h1>
+        </header>
+        {{/if}}
+{{/each}}
+
 
 {{#ifCond meta.type 'studystart'}}
 <ol class="breadcrumb">
-  <li><a href="#/finn-studie">Velg studium/kurs</a></li>
+  <li><a href="#/finn-studie">Velg studium</a></li>
   {{#if meta.courseId}}<li class="active"><a href="#/detaljer/{{meta.courseId}}">Detaljer for {{meta.courseId}}</a></li>{{/if}}
   {{#if meta.id}}<li><a href="#">{{meta.pageTitle}}</a></li>{{/if}}
 </ol>
@@ -19,23 +27,34 @@
           {{{openingday.contents}}}
           </div>
           <div class="fade-content"></div>
-          <a href="#" class="btn btn-default openingday-readmore">Les mer</a>
+          <a href="#" class="btn btn-primary openingday-readmore">Les mer om åpningsdagen</a>
         </article>
         {{/if}}
         {{#if calendar}}
         <article class="semester-start-details-item semester-start-details-item-icon lo-half">
         <a href="{{calendar}}">
-          <h1>Se din kalender</h1>
+          <h1>Din kalender</h1>
+        </a>
+        </article>
+        {{/if}}
+        {{#if registration}}
+        <article class="semester-start-details-item semester-start-details-item-icon lo-half">
+        <a href="#/detaljer/{{../../meta.courseId}}/{{registration.id}}">
+          <h1>{{registration.pagetitle}}</h1>
         </a>
         </article>
         {{/if}}
         {{#if aditionalinformation}}
         <article class="semester-start-details-item semester-start-details-item-icon lo-half">
         <a href="#/detaljer/{{../../meta.courseId}}/{{aditionalinformation.id}}">
-          <h1>{{!-- aditionalinformation.pagetitle --}}Spesiell oppstartinformasjon</h1>
-          <div class="semester-start-details-item-moreinfo">
-              {{{aditionalinformation.contents}}}
-          </div>
+          <h1>Oppstartsinformasjon</h1>
+        </a>
+        </article>
+        {{/if}}
+        {{#if policeandvacination}}
+        <article class="semester-start-details-item semester-start-details-item-icon lo-half">
+        <a href="#/detaljer/{{../../meta.courseId}}/{{policeandvacination.id}}">
+          <h1>{{policeandvacination.pagetitle}}</h1>
         </a>
         </article>
         {{/if}}
@@ -43,19 +62,13 @@
         <article class="semester-start-details-item semester-start-details-item-icon lo-half">
         <a href="#/detaljer/{{../../meta.courseId}}/{{campusinfo.id}}">
           <h1>{{campusinfo.pagetitle}}</h1>
-          <div class="semester-start-details-item-moreinfo">
-              {{{campusinfo.contents}}}
-          </div>
         </a>
         </article>
         {{/if}}
         {{#if sio}}
         <article class="semester-start-details-item semester-start-details-item-icon lo-half">
         <a href="#/detaljer/{{../../meta.courseId}}/{{sio.id}}">
-          <h1>{{sio.pagetitle}}</h1>
-          <div class="semester-start-details-item-moreinfo">
-              {{{sio.contents}}}
-          </div>
+          <h1>Studentsamskipnaden</h1>
         </a>
         </article>
         {{/if}}
@@ -63,29 +76,20 @@
         <article class="semester-start-details-item semester-start-details-item-icon lo-half">
         <a href="#/detaljer/{{../../meta.courseId}}/{{studentlife.id}}">
           <h1>{{studentlife.pagetitle}}</h1>
-          <div class="semester-start-details-item-moreinfo">
-              {{{studentlife.contents}}}
-          </div>
         </a>
         </article>
         {{/if}}
         {{#if itservices}}
         <article class="semester-start-details-item semester-start-details-item-icon lo-half">
         <a href="#/detaljer/{{../../meta.courseId}}/{{itservices.id}}">
-          <h1>{{itservices.pagetitle}}</h1>
-          <div class="semester-start-details-item-moreinfo">
-              {{{itservices.contents}}}
-          </div>
+          <h1>Brukerstøtte for IT-tjenester</h1>
         </a>
         </article>
         {{/if}}
         {{#if libraryservices}}
         <article class="semester-start-details-item semester-start-details-item-icon lo-half">
         <a href="#/detaljer/{{../../meta.courseId}}/{{libraryservices.id}}">
-          <h1>{{libraryservices.pagetitle}}</h1>
-          <div class="semester-start-details-item-moreinfo">
-              {{{libraryservices.contents}}}
-          </div>
+          <h1>Bibliotektjenester</h1>
         </a>
         </article>
         {{/if}}

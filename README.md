@@ -31,13 +31,16 @@ $ bower install
 ## Deploy
 
 1. Rename secret-template.json to secret.json and add your credentials.
-2. Deploy and test your code on the staging server `$ grunt deploy-staging`
-3. Deploy to production `$ grunt deploy-www`
+2. Deploy and test your code on the staging server `$ grunt deploy-stage`
+3. Deploy to production `$ grunt deploy-prod`
 
 ## Releases
 
-[Github releases](https://github.com/hiof/semesterstart/releases)
+- v1.0.0 - Initial semesterstart functionality
+
+[Github releases](https://github.com/hiof/semesterstart-view/releases)
 
 ### Roadmap
 
-v1.0.0 - Initial Semesterstart
+
+- v1.1.0 - Adjustments according to spring semester 2016
