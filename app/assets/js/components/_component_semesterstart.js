@@ -27,9 +27,9 @@
         options.courseId = this.params.course;
         options.template = 'details';
 
-        if(options.id === '30712'){
+        if (options.id === '30712') {
             options.openingday = true;
-        }else{
+        } else {
             options.url = 'http://hiof.no/api/v1/page/';
         }
 
@@ -55,21 +55,25 @@
     };
     semesterStartAppendData = function(data, settings) {
         //var data = semesterStartLoadData(options);
-        //debug(data);
+
         data.meta = settings;
         data.meta.type = 'studystart';
-
-        var templateSource;
+        //data.meta.name = data.semesterstart[8].name;
+        //debug(data);
+        var templateSource, markup;
 
         if (settings.template === 'details') {
+            templateSourceBreadcrumb = Hiof.Templates['semesterstart/breadcrumbs'];
             templateSource = Hiof.Templates['page/show'];
+            markup = templateSourceBreadcrumb(data) + templateSource(data);
         } else if (settings.template === 'single') {
-            templateSource = Hiof.Templates['study/semester-start-single'];
+            templateSource = Hiof.Templates['semesterstart/single'];
+            markup = templateSource(data);
         } else {
-            templateSource = Hiof.Templates['study/semester-start'];
+            templateSource = Hiof.Templates['semesterstart/list'];
+            markup = templateSource(data);
         }
 
-        var markup = templateSource(data);
         $('#semesterstart').html(markup);
         if ($('.footable').length) {
             $('.footable').footable();
@@ -164,10 +168,34 @@
             initatePathSemesterStart();
             Path.listen();
         }
-        $(document).on('click', '.openingday-readmore', function(e){
+        $(document).on('click', '.openingday-readmore', function(e) {
             e.preventDefault();
             $(this).parent().toggleClass("open");
         });
+
+        $(document).on('click', '#semesterstart a:not(".openingday-readmore")', function(e) {
+            //e.preventDefault();
+            var url = $(this).attr('href');
+            if (url.substring(0, 2) == "#/") {
+                //debug('String starts with #/');
+            } else if (url.substring(0, 1) == "#") {
+                url = url + "";
+                e.preventDefault();
+                if ($('.openingday').length) {
+                    if (!$('.openingday').hasClass('open')) {
+                        $('.openingday').toggleClass("open");
+                    }
+                }
+
+
+                setTimeout(function() {
+                    scrollToElement(url);
+                }, 200);
+                //debug('String starts with #');
+            }
+        });
+
+
     });
 
 
