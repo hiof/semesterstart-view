@@ -63,6 +63,9 @@ module.exports = function(grunt) {
       }
     },
     clean: {
+      options: {
+        force: true
+      },
       dist: ['dist/**/*'],
       deploy: ['deploy/**/*'],
       build: ['build/**/*']

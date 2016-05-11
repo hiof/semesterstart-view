@@ -4,14 +4,14 @@
     Path.map("#/finn-studie").enter(function() {
         //Reset checkboxes
         //resetFilter();
-        scrollToElement('#content');
+        //scrollToElement('#content');
     }).to(function() {
         semesterStartLoadData();
     });
     Path.map("#/finn-studie/").enter(function() {
         //Reset checkboxes
         //resetFilter();
-        scrollToElement('#content');
+        //scrollToElement('#content');
     }).to(function() {
         semesterStartLoadData();
     });
@@ -20,7 +20,7 @@
     Path.map("#/detaljer/:course/:page").enter(function() {
         //Reset checkboxes
         //resetFilter();
-        scrollToElement('#content');
+        //scrollToElement('#content');
     }).to(function() {
         var options = {};
         options.id = this.params.page;
@@ -40,7 +40,7 @@
     Path.map("#/detaljer/:course").enter(function() {
         //Reset checkboxes
         //resetFilter();
-        scrollToElement('#content');
+        //scrollToElement('#content');
     }).to(function() {
         var options = {};
         options.courseId = this.params.course;
@@ -189,7 +189,7 @@
 
 
                 setTimeout(function() {
-                    scrollToElement(url);
+                    //scrollToElement(url);
                 }, 200);
                 //debug('String starts with #');
             }
