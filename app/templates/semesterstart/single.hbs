@@ -1,98 +1,41 @@
-{{#each semesterstart}}
-       {{#if name}}
+{{#each data}}
+       {{#if attributes.name}}
         <header>
-          <h1>{{name}}</h1>
+          <h1>{{attributes.name}}</h1>
         </header>
         {{/if}}
 {{/each}}
 
-
-{{#ifCond meta.type 'studystart'}}
-<ol class="breadcrumb">
-  <li><a href="#/finn-studie">Velg studium</a></li>
-  {{#if meta.courseId}}<li class="active"><a href="#/detaljer/{{meta.courseId}}">Detaljer for {{meta.courseId}}</a></li>{{/if}}
-  {{#if meta.id}}<li><a href="#">{{meta.pageTitle}}</a></li>{{/if}}
-</ol>
-{{/ifCond}}
-
 <section class="lo-full padding-off semester-start semester-start-details">
 
-    {{#each semesterstart}}
 
-        {{#if openingday}}
-        <article class="semester-start-details-item semester-start-details-item-icon lo-full openingday" style="">
+  {{#each data}}
 
-          <h1>{{openingday.pagetitle}}</h1>
-          <div class="semester-start-details-item-moreinfo ">
-          {{{openingday.contents}}}
-          </div>
-          <div class="fade-content"></div>
-          <a href="#" class="btn btn-primary openingday-readmore">Les mer om åpningsdagen</a>
-        </article>
+  {{#each attributes.page}}
+    {{#if expanded}}
+      <article class="semester-start-details-item semester-start-details-item-icon lo-full newstudent" style="">
+        <h1>{{title}}</h1>
+        <div class="semester-start-details-item-moreinfo ">
+        {{{content}}}
+        </div>
+        <div class="fade-content"></div>
+          <a href="#" class="btn btn-primary newstudent-readmore">Les mer om hva du må gjøre som ny student</a>
+    {{else}}
+
+      <article class="semester-start-details-item semester-start-details-item-icon lo-half" style="">
+        {{#if link}}
+          <a href="{{link}}" target="{{linkTarget}}"><h1>{{title}}</h1></a>
+        {{else}}
+          <a href="#/detaljer/{{../../../../meta.courseId}}/{{id}}"><h1>{{title}}</h1></a>
         {{/if}}
-        {{#if calendar}}
-        <article class="semester-start-details-item semester-start-details-item-icon lo-half">
-        <a href="{{calendar}}">
-          <h1>Din kalender</h1>
-        </a>
-        </article>
-        {{/if}}
-        {{#if registration}}
-        <article class="semester-start-details-item semester-start-details-item-icon lo-half">
-        <a href="#/detaljer/{{../../meta.courseId}}/{{registration.id}}">
-          <h1>{{registration.pagetitle}}</h1>
-        </a>
-        </article>
-        {{/if}}
-        {{#if aditionalinformation}}
-        <article class="semester-start-details-item semester-start-details-item-icon lo-half">
-        <a href="#/detaljer/{{../../meta.courseId}}/{{aditionalinformation.id}}">
-          <h1>Oppstartsinformasjon</h1>
-        </a>
-        </article>
-        {{/if}}
-        {{#if policeandvacination}}
-        <article class="semester-start-details-item semester-start-details-item-icon lo-half">
-        <a href="#/detaljer/{{../../meta.courseId}}/{{policeandvacination.id}}">
-          <h1>{{policeandvacination.pagetitle}}</h1>
-        </a>
-        </article>
-        {{/if}}
-        {{#if campusinfo}}
-        <article class="semester-start-details-item semester-start-details-item-icon lo-half">
-        <a href="#/detaljer/{{../../meta.courseId}}/{{campusinfo.id}}">
-          <h1>{{campusinfo.pagetitle}}</h1>
-        </a>
-        </article>
-        {{/if}}
-        {{#if sio}}
-        <article class="semester-start-details-item semester-start-details-item-icon lo-half">
-        <a href="#/detaljer/{{../../meta.courseId}}/{{sio.id}}">
-          <h1>Studentsamskipnaden</h1>
-        </a>
-        </article>
-        {{/if}}
-        {{#if studentlife}}
-        <article class="semester-start-details-item semester-start-details-item-icon lo-half">
-        <a href="#/detaljer/{{../../meta.courseId}}/{{studentlife.id}}">
-          <h1>{{studentlife.pagetitle}}</h1>
-        </a>
-        </article>
-        {{/if}}
-        {{#if itservices}}
-        <article class="semester-start-details-item semester-start-details-item-icon lo-half">
-        <a href="{{itservices}}">
-          <h1>Brukerstøtte for IT-tjenester</h1>
-        </a>
-        </article>
-        {{/if}}
-        {{#if libraryservices}}
-        <article class="semester-start-details-item semester-start-details-item-icon lo-half">
-        <a href="{{libraryservices}}">
-          <h1>Bibliotektjenester</h1>
-        </a>
-        </article>
-        {{/if}}
-    {{/each}}
+    {{/if}}
+    </article>
+  {{/each}}
+
+
+
+  {{/each}}
+
+
 
 </section>

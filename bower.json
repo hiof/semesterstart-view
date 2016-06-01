@@ -11,6 +11,6 @@
     "bootstrap": "~3.1.1",
     "handlebars": "~2.0.0",
     "pathjs": "https://github.com/mtrpcic/pathjs.git",
-    "frontend": "https://github.com/hiof/frontend.git"
+    "page-view": "https://github.com/hiof/page-view.git"
   }
 }
