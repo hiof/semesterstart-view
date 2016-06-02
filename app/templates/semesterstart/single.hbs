@@ -14,12 +14,12 @@
   {{#each attributes.page}}
     {{#if expanded}}
       <article class="semester-start-details-item semester-start-details-item-icon lo-full newstudent" style="">
-        <h1>{{title}}</h1>
+        <a href="#/detaljer/{{../../../meta.courseId}}/{{id}}"><h1>{{title}}</h1></a>
         <div class="semester-start-details-item-moreinfo ">
         {{{content}}}
         </div>
         <div class="fade-content"></div>
-          <a href="#" class="btn btn-primary newstudent-readmore">Les mer om hva du må gjøre som ny student</a>
+        <a href="#/detaljer/{{../../../meta.courseId}}/{{id}}" class="btn btn-primary newstudent-readmore">Les mer om hva du må gjøre som ny student</a>
     {{else}}
 
       <article class="semester-start-details-item semester-start-details-item-icon lo-half" style="">
