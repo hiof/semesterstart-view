@@ -158,10 +158,6 @@ function foo(title, author) {
       initatePathSemesterStart();
       Path.listen();
     }
-    $(document).on('click', '.newstudent-readmore', function(e) {
-      e.preventDefault();
-      $(this).parent().toggleClass("open");
-    });
 
     $(document).on('click', '#semesterstart a:not(".newstudent-readmore")', function(e) {
       //e.preventDefault();
@@ -179,7 +175,8 @@ function foo(title, author) {
 
 
         setTimeout(function() {
-          //scrollToElement(url);
+          var thisView = new View();
+          thisView.scrollToElement('#content');
         }, 200);
         //debug('String starts with #');
       }

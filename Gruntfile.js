@@ -8,18 +8,14 @@ module.exports = function(grunt) {
     pkg: grunt.file.readJSON('package.json'),
     moment: require('moment'),
     // Tasks
-    less: {
-      standard: {
-        options: {
+    sass: {
+      options: {
 
-        },
-        files: [{
-          expand: true,
-          cwd: 'app/assets/less/',
-          src: ['*.less'],
-          dest: 'build/',
-          ext: '.css'
-        }]
+      },
+      dist: {
+        files: {
+          'build/<%= pkg.name %>.css': 'app/assets/sass/<%= pkg.name %>.scss'
+        }
       }
     },
     autoprefixer: {
@@ -246,14 +242,14 @@ module.exports = function(grunt) {
 });
 
 grunt.registerTask('subtaskJs', ['handlebars','jshint', 'concat:scripts', 'uglify', 'copy:jstemplates']);
-grunt.registerTask('subtaskCss', ['less', 'autoprefixer', 'cssmin']);
+grunt.registerTask('subtaskCss', ['sass', 'autoprefixer', 'cssmin']);
 
 grunt.registerTask('build', ['clean:build', 'clean:dist', 'subtaskJs', 'subtaskCss', 'versioning:build']);
 grunt.registerTask('deploy', ['clean:build', 'clean:dist', 'subtaskJs', 'subtaskCss', 'versioning:deploy', 'copy:dist']);
 
 
 
-grunt.registerTask('deploy-stage', ['deploy', 'sftp:stage']);
+grunt.registerTask('deploy-staging', ['deploy', 'sftp:stage']);
 grunt.registerTask('deploy-prod', ['deploy', 'sftp:prod']);
 
 };
