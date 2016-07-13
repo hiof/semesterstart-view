@@ -59,13 +59,14 @@ $ bower install
 
 ## Releases
 
-- v2.1.0 - Design refinements of sticky posts
-- v2.0.0 - Updated view to the v2 of the API
-- v1.0.0 - Initial semesterstart functionality
+- [x] v2.2.0 - Rewrite functionality to ES2015 + enhanced data.meta information which leads to more informational breadcrumb and page titles
+
+- [x] v2.1.0 - Design refinements of sticky posts
+- [x] v2.0.0 - Updated view to the v2 of the API
+- [x] v1.0.0 - Initial semesterstart functionality
 
 [Github releases](https://github.com/hiof/semesterstart-view/releases)
 
 ### Roadmap
 
-
-- v2.2.0 - Rewrite functionality to ES2015 + enhanced data.meta information which leads to more informational breadcrumb and page titles
+- [ ] v2.3.0 - Design and UX enhancements
