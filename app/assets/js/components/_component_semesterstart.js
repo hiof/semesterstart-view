@@ -1,20 +1,84 @@
-/** This is a description of the foo function. */
-function foo(title, author) {
+class SemesterstartView {
+
+  /**
+  * Setup constants
+  */
+  constructor() {
+    this.view = new View();
+    this.breadcrumbTemplate = Hiof.Templates['semesterstart/breadcrumbs'];
+    this.pageShowTemplate = Hiof.Templates['page/show'];
+    this.semesterstartSingle = Hiof.Templates['semesterstart/single'];
+    this.semesterstartList = Hiof.Templates['semesterstart/list'];
+    this.defaults = {
+      // These are the defaults.
+      id: null,
+      server: 'www2',
+      courseId: null,
+      template: "list",
+      openingday: false,
+      url: 'http://hiof.no/api/v2/semesterstart/list/',
+      calendar: null,
+      type: null,
+    };
+  }
+
+  /**
+   * Gets the data with view.getData and render it to the page
+   * @param {Object[]} options - Object contains options from the route
+   * @return {View} - View rendered within #semesterstart container
+  */
+  renderSemesterstart(options = {}){
+    let settings = Object.assign(
+      {},
+      this.defaults,
+      options
+    );
+    let that = this;
+    this.view.getData(settings, that).success(function(data){
+      // Attach settings as meta object to data
+      data.meta = settings;
+      data.meta.type = 'studystart';
+
+      // Setup the template-combo
+      if (settings.template === 'details') {
+        markup = that.breadcrumbTemplate(data) + that.pageShowTemplate(data);
+      } else if (settings.template === 'item') {
+        markup = that.breadcrumbTemplate(data) + that.semesterstartSingle(data);
+      } else {
+        markup = that.semesterstartList(data);
+      }
+
+      // Insert the data-prop template to the page
+      $('#semesterstart').html(markup);
+
+      //Activate footable if there is a table on the page
+      if ($('.footable').length) {
+        $('.footable').footable();
+      }
+
+    });
+  };
 }
 
 
+
 (function(Hiof, undefined) {
+  let thisSemesterstartView = new SemesterstartView();
+
+  /** Routes */
   Path.map("#/finn-studie").enter(function() {
     var thisView = new View();
     thisView.scrollToElement('#content');
   }).to(function() {
-    semesterStartLoadData();
+    thisSemesterstartView.renderSemesterstart();
+    //semesterStartLoadData();
   });
   Path.map("#/finn-studie/").enter(function() {
     var thisView = new View();
     thisView.scrollToElement('#content');
   }).to(function() {
-    semesterStartLoadData();
+    thisSemesterstartView.renderSemesterstart();
+    //semesterStartLoadData();
   });
   Path.map("#/detaljer/:course/:page").enter(function() {
     var thisView = new View();
@@ -25,7 +89,7 @@ function foo(title, author) {
     options.courseId = this.params.course;
     options.template = 'details';
     options.url = 'http://hiof.no/api/v1/page/' + '?id=' + this.params.page + '&server=www2';
-    semesterStartLoadData(options);
+    thisSemesterstartView.renderSemesterstart(options);
   });
   Path.map("#/detaljer/:course").enter(function() {
     var thisView = new View();
@@ -34,119 +98,16 @@ function foo(title, author) {
     var options = {};
     options.courseId = this.params.course;
     options.template = 'item';
+    options.type = 'item';
     options.url = 'http://hiof.no/api/v2/semesterstart/list/' + '?type=item&studyprogramcode=' +this.params.course;
-    //console.log(options);
-    semesterStartLoadData(options);
+    console.log(options);
+    thisSemesterstartView.renderSemesterstart(options);
   });
   initatePathSemesterStart = function() {
     // Load root path if no path is active
     Path.root("#/finn-studie");
   };
-  semesterStartAppendData = function(data, settings) {
-    //var data = semesterStartLoadData(options);
-    data.meta = settings;
-    data.meta.type = 'studystart';
-    //data.meta.name = data.semesterstart[8].name;
-    //debug(data);
-    var templateSource, markup;
 
-    if (settings.template === 'details') {
-      templateSourceBreadcrumb = Hiof.Templates['semesterstart/breadcrumbs'];
-      templateSource = Hiof.Templates['page/show'];
-      markup = templateSourceBreadcrumb(data) + templateSource(data);
-    } else if (settings.template === 'item') {
-      templateSourceBreadcrumb = Hiof.Templates['semesterstart/breadcrumbs'];
-      templateSource = Hiof.Templates['semesterstart/single'];
-      markup = templateSourceBreadcrumb(data) + templateSource(data);
-    } else {
-      templateSource = Hiof.Templates['semesterstart/list'];
-      markup = templateSource(data);
-    }
-
-    $('#semesterstart').html(markup);
-    if ($('.footable').length) {
-      $('.footable').footable();
-    }
-    // Check if the user want to save theirs study preference
-    //if (settings.template === 'single'){
-    //    if (!$.cookie('semesterstart')) {
-    //        debug('Semesterstart cookie does not excist');
-    //    }
-    //}
-  };
-
-  semesterStartLoadData = function(options) {
-    // If options are not defined
-    if (typeof options === 'undefined' || options === null) {
-      // Get options from the initializer element
-      //console.log("options is undefined");
-      options = {};
-    }
-
-    // Setup the query
-    var settings = $.extend({
-      id: null,
-      server: 'www2',
-      courseId: null,
-      template: "list",
-      openingday: false,
-      url: 'http://hiof.no/api/v2/semesterstart/list/',
-      calendar: null,
-      type: null,
-    }, options);
-
-    //console.log(settings);
-
-    var contentType = "application/x-www-form-urlencoded; charset=utf-8";
-    if (window.XDomainRequest) { //for IE8,IE9
-      contentType = "text/plain";
-    }
-
-    //console.log("Settings: ");
-    //console.log(settings);
-
-    $.ajax({
-      url: settings.url,
-      method: 'GET',
-      //async: true,
-      dataType: 'json',
-      //data: settings,
-      contentType: contentType,
-      success: function(data) {
-        //alert("Data from Server: "+JSON.stringify(data));
-        //console.log("Data: ");
-        //console.log(data);
-        //console.log(thisUrl);
-        //return data;
-        semesterStartAppendData(data, settings);
-        //Hiof.articleDisplayView(data, settings);
-      },
-      error: function(jqXHR, textStatus, errorThrown) {
-        console.log("jqXHR: ");
-        console.log(jqXHR);
-        console.log("textStatus: ");
-        console.log(textStatus);
-        console.log("errorThrown: ");
-        console.log(errorThrown);
-        //alert("You can not send Cross Domain AJAX requests: " + errorThrown);
-      }
-
-    });
-  };
-
-
-  semesterStart = function(courseid) {
-    var options = {};
-
-    options.template = 'list';
-    if (typeof courseid === 'undefined' || courseid === null) {
-      options.courseid = '';
-    } else {
-      options.courseid = courseid;
-    }
-    semesterStartLoadData(options);
-
-  };
 
 
 
@@ -163,21 +124,26 @@ function foo(title, author) {
       //e.preventDefault();
       var url = $(this).attr('href');
       if (url.substring(0, 2) == "#/") {
-        //debug('String starts with #/');
+        //e.preventDefault();
+        //console.log('String starts with #/');
       } else if (url.substring(0, 1) == "#") {
+        //e.preventDefault();
+        //console.log('String starts with #');
+
         url = url + "";
+
         e.preventDefault();
-        if ($('.newstudent').length) {
-          if (!$('.newstudent').hasClass('open')) {
-            $('.newstudent').toggleClass("open");
-          }
-        }
+        //f ($('.newstudent').length) {
+        //  if (!$('.newstudent').hasClass('open')) {
+        //    $('.newstudent').toggleClass("open");
+        //  }
+        //
 
 
         setTimeout(function() {
           var thisView = new View();
-          thisView.scrollToElement('#content');
-        }, 200);
+          thisView.scrollToElement(url);
+        }, 100);
         //debug('String starts with #');
       }
     });

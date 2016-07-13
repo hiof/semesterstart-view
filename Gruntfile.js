@@ -67,12 +67,20 @@ module.exports = function(grunt) {
       build: ['build/**/*']
     },
 
-    jshint: {
+    eslint: {
       options: {
-        ignores: ['app/assets/js/templates/templates.js']
+        //format: require('babel-eslint'),
+        quiet: true
+        //rulePath: ['node_modules/eslint-rules-es2015/lib/index.js']
       },
-      files: ['app/assets/js/**/*.js', 'Gruntfile.js', 'bower.json', 'package.json']
+      target: ['app/assets/js/**/*.js']
     },
+    //jshint: {
+    //  options: {
+    //    ignores: ['app/assets/js/templates/templates.js']
+    //  },
+    //  files: ['app/assets/js/**/*.js', 'Gruntfile.js', 'bower.json', 'package.json']
+    //},
     handlebars: {
       options: {
         namespace: 'Hiof.Templates',
@@ -90,11 +98,24 @@ module.exports = function(grunt) {
         }
       }
     },
+    babel: {
+      options: {
+        sourceMap: true
+        //presets: ['es2015']
+      },
+      dist: {
+        files: {
+          'build/_view.js': 'vendor/frontend/app/assets/js/components/_view.js',
+          'build/_<%= pkg.name %>.js': 'app/assets/js/components/_component_semesterstart.js'
+        }
+      }
+    },
     concat: {
       scripts: {
         src: [
           'build/templates.js',
-          'app/assets/js/components/_component_semesterstart.js'
+          'build/_view.js',
+          'build/_<%= pkg.name %>.js'
         ],
         dest: 'build/<%= pkg.name %>.v<%= pkg.version %>.min.js'
       }
@@ -241,7 +262,7 @@ module.exports = function(grunt) {
 
 });
 
-grunt.registerTask('subtaskJs', ['handlebars','jshint', 'concat:scripts', 'uglify', 'copy:jstemplates']);
+grunt.registerTask('subtaskJs', ['eslint', 'handlebars', 'babel', 'concat:scripts', 'uglify', 'copy:jstemplates']);
 grunt.registerTask('subtaskCss', ['sass', 'autoprefixer', 'cssmin']);
 
 grunt.registerTask('build', ['clean:build', 'clean:dist', 'subtaskJs', 'subtaskCss', 'versioning:build']);
