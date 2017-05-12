@@ -16,7 +16,7 @@ class SemesterstartView {
       courseId: null,
       template: "list",
       openingday: false,
-      url: 'http://hiof.no/api/v2/semesterstart/list/',
+      url: 'http://www.hiof.no/api/v2/semesterstart/list/',
       calendar: null,
       type: null,
     };
@@ -88,7 +88,7 @@ class SemesterstartView {
     options.id = this.params.page;
     options.courseId = this.params.course;
     options.template = 'details';
-    options.url = 'http://hiof.no/api/v1/page/' + '?id=' + this.params.page + '&server=www2';
+    options.url = 'http://www.hiof.no/api/v1/page/' + '?id=' + this.params.page + '&server=www2';
     thisSemesterstartView.renderSemesterstart(options);
   });
   Path.map("#/detaljer/:course").enter(function() {
@@ -99,7 +99,7 @@ class SemesterstartView {
     options.courseId = this.params.course;
     options.template = 'item';
     options.type = 'item';
-    options.url = 'http://hiof.no/api/v2/semesterstart/list/' + '?type=item&studyprogramcode=' +this.params.course;
+    options.url = 'http://www.hiof.no/api/v2/semesterstart/list/' + '?type=item&studyprogramcode=' +this.params.course;
     console.log(options);
     thisSemesterstartView.renderSemesterstart(options);
   });
