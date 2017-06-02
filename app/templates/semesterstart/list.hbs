@@ -2,8 +2,9 @@
     <h1>Studiestart</h1>
 </header>
 <aside class="lo-full padding-off">
-<p>Søk frem studiet du skal begynne på til høsten. Da vil du finne viktig informasjon for deg som ny student, og du kan se og synkronisere din kalender.</p>
-<p><a href="http://www2.hiof.no/index.php?ID=22489">Info om studiestart for Y-veien og TRESS (Tresemesterordning).</a></p>
+<p>Studiestart er 16. august. I tiden fremover vil du her finne viktig informasjon for deg som ny student, og du kan se og synkronisere din kalender.</p>
+<p><a href="https://www.hiof.no/?ID=31257">Info om studiestart for Y-veien og TRESS (Tresemesterordning).</a></p>
+
 {{#ifCond meta.type 'studystart'}}
 <ol class="breadcrumb">
   <li><form class="form-inline"><div class="form-group"><label for="semesterstart-filter" class="visuallyhidden">Søk fram ditt studium</label><input id="semesterstart-filter" type="text" class="form-control" placeholder="Søk fram ditt studium" ></div></form></li>
@@ -16,16 +17,13 @@
         <tr>
             <th data-sort-initial="true">Studieprogram</th>
             <th data-hide="phone">Informasjon</th>
-            <th data-hide="phone">Kalender</th>
         </tr>
     </thead>
     <tbody>
         {{#each data}}
         <tr data-course-id="{{course-id}}">
             <td>{{capitalizeFirstLetter attributes.name}}</td>
-
             <td><a class="btn btn-default" href="#/detaljer/{{attributes.studyprogramcode}}">mer informasjon</a></td>
-            <td>{{#if attributes.timeedit}}<a class="btn btn-default" target="_blank" href="{{attributes.timeedit}}">din kalender</a>{{/if}}</td>
         </tr>
         {{/each}}
     </tbody>

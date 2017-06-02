@@ -3,7 +3,7 @@
 @import '../../../vendor/sass-mq/mq';
 @import '../../../vendor/bootstrap-sass/assets/stylesheets/bootstrap/_variables';
 @import '../../../vendor/bootstrap-sass/assets/stylesheets/bootstrap/_mixins';
-@import '../../../vendor/frontend/app/assets/sass/variables/_standard.scss';
+@import '../../../vendor/frontend/app/assets/sass/variables/_breakpoints.scss';
 
 
 #semesterstart {
@@ -111,7 +111,7 @@
   }
   .semester-start-details-item-moreinfo {
     transition: max-height .4s ease;
-    max-height: 25rem;
+    max-height: 8rem;
     overflow: hidden;
     height: auto;
   }
