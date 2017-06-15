@@ -17,6 +17,8 @@
   }
 }
 .semester-start {
+  display: flex;
+  flex-flow: row wrap;
   .tablet {
     .footable-toggle {
       display: none;
